@@ -1,7 +1,8 @@
 _target_: torch.nn.Sequential
+# 三层mlp，128-64-32
 _args_:
   - _target_: torch.nn.Linear
-    in_features: ${....num_critic_obs}
+    in_features: ${....num_critic_obs} # critic的观测
     out_features: 128
   - _target_: torch.nn.ELU
   - _target_: torch.nn.Linear
@@ -14,4 +15,4 @@ _args_:
   - _target_: torch.nn.ELU
   - _target_: torch.nn.Linear
     in_features: 32
-    out_features: 1
+    out_features: 1 # 1 value

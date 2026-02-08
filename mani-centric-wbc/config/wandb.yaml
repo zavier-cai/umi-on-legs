@@ -3,5 +3,5 @@ wandb:
   tags: null
   group: null
   resume: false
-  mode: online
+  mode: online # 在线记录
 

@@ -11,7 +11,7 @@ import zarr
 import torch
 from omegaconf import OmegaConf
 from rich.progress import track
-from transforms3d import affines, quaternions
+from transforms3d import affines, quaternions # 旋转变化 
 from legged_gym.rsl_rl.runners.on_policy_runner import OnPolicyRunner
 
 import wandb

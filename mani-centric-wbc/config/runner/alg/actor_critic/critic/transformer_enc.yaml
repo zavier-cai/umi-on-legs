@@ -1,7 +1,8 @@
 _target_: torch.nn.Sequential
+# transformer encoder编码历史观测，并作为mlp的输入
 _args_:
   - _target_: legged_gym.rsl_rl.modules.obs_encoder.TransformerHistoryEncoder
-    obs_dim: ${env.cfg.env.num_privileged_observations}
+    obs_dim: ${env.cfg.env.num_privileged_observations} # 具有特权观测
     history_len: ${env.obs_history_len}
     hidden_dim: 128
     num_layers: 3
@@ -16,4 +17,4 @@ _args_:
   - _target_: torch.nn.ELU
   - _target_: torch.nn.Linear
     in_features: 32
-    out_features: 1
+    out_features: 1 # 1 value

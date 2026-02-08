@@ -5,6 +5,7 @@ defaults:
   - runner: on_policy_runner
   - _self_
 
+# 下面的超参数将覆盖默认值
 runner:
   max_iterations:  ${eval:"1000 if 'locomotion' in ${env.tasks} else 20000"} # locomotion converges faster
   device: ${env.sim_device}
@@ -13,14 +14,14 @@ runner:
     entropy_coef: 0.01
     actor_critic:
       init_noise_std: 1.0
-      num_actor_obs: ${eval:"int(${env.cfg.env.num_observations})*int(${env.obs_history_len})"}
-      num_critic_obs: ${env.cfg.env.num_privileged_obs}
+      num_actor_obs: ${eval:"int(${env.cfg.env.num_observations})*int(${env.obs_history_len})"} # 有历史观测
+      num_critic_obs: ${env.cfg.env.num_privileged_obs} # 有特权观测
       num_actions: ${env.cfg.env.num_actions}
 env:
   seed: ${seed}
   vis_resolution: ${runner.vis_resolution}
   cfg:
     env:
-      send_timeouts: true # otherwise, would greatly blow up policy value
-ckpt_path: null
+      send_timeouts: true # otherwise, would greatly blow up policy value 否则，会导致策略价值严重发散
+ckpt_path: null # 检查点路径，命令行指定
 use_noise: True

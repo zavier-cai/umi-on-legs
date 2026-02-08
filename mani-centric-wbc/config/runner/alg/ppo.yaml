@@ -11,13 +11,13 @@ entropy_coef: 0.001
 num_learning_epochs: 32
 num_mini_batches: 4
 learning_rate: 0.001
-schedule: "adaptive"
-gamma: 0.9
-lam: 0.95
-desired_kl: 0.01
-max_grad_norm: 1.0
-max_lr: 1e-2
-min_lr: 0.0001
+schedule: "adaptive" # 自适应学习率
+gamma: 0.9 # 折扣因子
+lam: 0.95 # lambda值
+desired_kl: 0.01 # 期望kl值
+max_grad_norm: 1.0 # 最大梯度范数
+max_lr: 1e-2 # 最大学习率
+min_lr: 0.0001 # 最小学习率
 actor_critic:
   _target_: legged_gym.rsl_rl.modules.ActorCritic
   num_actor_obs: ???

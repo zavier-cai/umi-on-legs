@@ -66,6 +66,7 @@ def recursively_lists_to_dict(
     return target
 
 
+# 初始化wandb
 def setup(config: Dict[str, Any], seed: int):
     config["git_hash"] = git.Repo(search_parent_directories=True).head.object.hexsha
     wandb.init(

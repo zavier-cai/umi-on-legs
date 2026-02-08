@@ -1,19 +1,20 @@
 _target_: torch.nn.Sequential
+# transformer encoder编码历史观测，并作为mlp的输入
 _args_:
   - _target_: legged_gym.rsl_rl.modules.obs_encoder.TransformerHistoryEncoder
-    obs_dim: ${env.cfg.env.num_observations}
-    history_len: ${env.obs_history_len}
+    obs_dim: ${env.cfg.env.num_observations} # 单步观测
+    history_len: ${env.obs_history_len} # 历史观测长度
     hidden_dim: 128
     num_layers: 3
     dim_feedforward: 128
-    n_head: 4
+    n_head: 4 # 4个注意力头
     use_positional_encoding: false
-    output_latent_dim: 8
-    concat_most_recent_obs: true
+    output_latent_dim: 8 # 8维latent
+    concat_most_recent_obs: true # 拼接当前步原始观测
   - _target_: torch.nn.Linear
     in_features: 128
     out_features: 32
   - _target_: torch.nn.ELU
   - _target_: torch.nn.Linear
     in_features: 32
-    out_features: ${....num_actions}
+    out_features: ${....num_actions} # 18 dof action

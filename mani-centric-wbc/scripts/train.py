@@ -1,6 +1,6 @@
 import hydra
 from isaacgym import gymapi, gymutil  # must be improved before torch
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf # 配置文件
 from utils import setup
 
 import wandb
@@ -14,7 +14,7 @@ def train(config):
     config_dict = OmegaConf.to_container(config, resolve=True)
     setup(config_dict, seed=config.seed)  # type: ignore
     sim_params = gymapi.SimParams()
-    gymutil.parse_sim_config(config.env.cfg.sim, sim_params)
+    gymutil.parse_sim_config(config.env.cfg.sim, sim_params) # 解析sim配置
     env = hydra.utils.instantiate(config.env, sim_params=sim_params)
     config.runner.ckpt_dir = wandb.run.dir
 
